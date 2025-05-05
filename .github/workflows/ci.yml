@@ -22,10 +22,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          path: src
 
       - name: Configure
         run: cmake \
-               -S . \
+               -S src \
                -B build \
                -GNinja \
                -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
