@@ -42,10 +42,16 @@ jobs:
       - name: Build
         run: cmake --build build --parallel
 
-      - name: Inspect RPATHs
+      - name: Inspect bundle RPATHs
         run: |
+          echo "⟨⟨ RPATHs ⟩⟩"
           otool -l build/bin/Blender.app/Contents/MacOS/Blender \
-            | grep -A2 LC_RPATH || echo "no RPATHs found"
+            | grep -A2 LC_RPATH || echo "no RPATHs"
+
+      - name: List bundled libraries
+        run: |
+          echo "⟨⟨ Resources/lib contents ⟩⟩"
+          ls -1 build/bin/Blender.app/Contents/Resources/lib || echo "(none)"
 
       - name: Test
         run: |
