@@ -32,8 +32,12 @@ jobs:
 
       - name: Configure
         run: |
-          cmake -S src -B build -GNinja \
-            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+          cmake \
+            -S src -B build -GNinja \
+            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+            -DCMAKE_BUILD_WITH_INSTALL_RPATH=ON \
+            -DCMAKE_INSTALL_RPATH=@loader_path/../Resources/lib
+
 
       - name: Build
         run: cmake --build build --parallel
