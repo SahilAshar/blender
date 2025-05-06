@@ -25,6 +25,11 @@ jobs:
         with:
           path: src
 
+      - name: Pre-build Command make update
+        run: |
+          cd src
+          make update
+
       - name: Configure
         run: cmake \
                -S src \
