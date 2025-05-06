@@ -42,6 +42,11 @@ jobs:
       - name: Build
         run: cmake --build build --parallel
 
+      - name: Inspect RPATHs
+        run: |
+          otool -l build/bin/Blender.app/Contents/MacOS/Blender \
+            | grep -A2 LC_RPATH || echo "no RPATHs found"
+
       - name: Test
         run: |
           ctest --test-dir build --output-on-failure
