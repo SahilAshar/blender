@@ -31,18 +31,15 @@ jobs:
           make update
 
       - name: Configure
-        run: cmake \
-               -S src \
-               -B build \
-               -GNinja \
-               -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+        run: |
+          cmake -S src -B build -GNinja \
+            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
 
       - name: Build
         run: cmake --build build --parallel
 
       - name: Test
-        run: ctest \
-               --test-dir build \
-               --output-on-failure
+        run: |
+          ctest --test-dir build --output-on-failure
 
 
